@@ -3,24 +3,156 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activities.MainActivity">
+    android:orientation="vertical"
+    tools:context=".presentation.activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <!-- BACKGROUND -->
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_background_better" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <!-- TOOLBAR WRAPPER -->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Learn tricks"
-        android:id="@+id/learn_tricks_button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="81dp" />
+        android:orientation="vertical">
+
+        <!-- TOOLBAR -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="5dp"
+            android:background="#484847">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:src="@drawable/img_drawer_button" />
+
+            <!-- TITLE -->
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Dashboard"
+                android:textColor="#b1b1b1"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- CONTENT WRAPPER -->
+    <RelativeLayout
+        android:id="@+id/content_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <!-- HEADER -->
+        <RelativeLayout
+            android:id="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="-5dp"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp">
+
+            <!-- SPEED LABEL -->
+            <TextView
+                android:id="@+id/speed_label"
+                android:text="Speed"
+                android:textColor="#000"
+                android:textSize="22sp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="17dp"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- SPEED -->
+            <TextView
+                android:id="@+id/speed_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="15 KmH"
+                android:textAllCaps="true"
+                android:textColor="#000"
+                android:textSize="54sp" />
+
+
+        </RelativeLayout>
+
+        <!-- CONTENT -->
+        <RelativeLayout
+            android:layout_above="@+id/footer_layout"
+            android:layout_below="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- SKATE AND ACCELEROMETER -->
+            <ImageView
+                android:id="@+id/skate_circle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:paddingBottom="15dp"
+                android:src="@drawable/img_skate_circle_with_accelerometer"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+        <!-- FOOTER -->
+        <RelativeLayout
+            android:id="@+id/footer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:paddingBottom="57dp">
+
+            <!-- LEARN TRICKS BUTTON -->
+            <Button
+                android:background="@drawable/button_rounded"
+                android:textColor="#fefefe"
+                android:id="@+id/learn_tricks_button"
+                android:layout_width="135dp"
+                android:layout_height="40dp"
+                android:text="Learn tricks"
+                android:textSize="25.5sp"/>
+
+        </RelativeLayout>
+
+        <!-- SPEED LABEL -->
+        <TextView
+            android:id="@+id/tilted_text"
+            android:text="Tilted to left, top"
+            android:textColor="#000"
+            android:textSize="22sp"
+            android:textAllCaps="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
 </RelativeLayout>

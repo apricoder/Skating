@@ -1,27 +1,31 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.servocode.skating.fragments.TrickFragment">
+    tools:context=".presentation.fragments.TrickFragment">
+
+    <!-- BACKGROUND -->
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_background_better" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/trick_name"
-            android:text="Trick Name"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <ImageView
+            android:id="@+id/trick_image"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginRight="-10dp"
+            tools:src="@drawable/trick_flip"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </LinearLayout>
 
-
-
-</FrameLayout>
+</RelativeLayout>
