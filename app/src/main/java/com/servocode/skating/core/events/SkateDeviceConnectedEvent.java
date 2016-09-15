@@ -10,7 +10,7 @@ public class SkateDeviceConnectedEvent extends SkateEvent {
     private Object data;
 
     public SkateDeviceConnectedEvent() {
-        super("Skate device connected!");
+        super("Connected to skate!");
     }
 
     public SkateDeviceConnectedEvent(Object data) {

@@ -8,4 +8,5 @@ import lombok.Data;
 public class SkatePosition {
     private float frontBackTint;
     private float leftRightTint;
+    private float magicValue;
 }

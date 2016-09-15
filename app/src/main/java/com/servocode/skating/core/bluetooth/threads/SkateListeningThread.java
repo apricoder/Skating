@@ -84,7 +84,8 @@ public class SkateListeningThread implements Runnable {
         String[] dataComponents = data.split(";");
         float frontBackAngle = Float.parseFloat(dataComponents[3]);
         float leftRightAngle = Float.parseFloat(dataComponents[4]);
-        return new SkatePosition(frontBackAngle, leftRightAngle);
+        float magicValue = Float.parseFloat(dataComponents[5]);
+        return new SkatePosition(frontBackAngle, leftRightAngle, magicValue);
     }
 
     private boolean isComplete(String data) {

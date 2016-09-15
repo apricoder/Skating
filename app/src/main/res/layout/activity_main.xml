@@ -90,10 +90,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="15 KmH"
+                android:text="0MS"
                 android:textAllCaps="true"
                 android:textColor="#000"
                 android:textSize="54sp" />
+
+            <!-- SPEED LABEL -->
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/magic_value_indicator"
+                android:text="10.00"
+                android:textColor="#000"
+                android:textSize="22sp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="17dp"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
         </RelativeLayout>
