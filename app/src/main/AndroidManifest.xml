@@ -7,7 +7,7 @@
     <application
         android:name=".core.app.SkatingApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/img_skate_icon_512_rounded"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

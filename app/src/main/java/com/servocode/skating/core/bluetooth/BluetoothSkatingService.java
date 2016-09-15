@@ -22,6 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Set;
 
 public class BluetoothSkatingService {
@@ -32,6 +33,7 @@ public class BluetoothSkatingService {
     private BluetoothDevice skate;
     private BluetoothSocket skateDataSocket = null;
     private InputStream inputStream;
+    private OutputStream outputStream;
 
     public BluetoothSkatingService(SkatingApplication application) {
         EventBus.getDefault().register(this);
@@ -85,7 +87,14 @@ public class BluetoothSkatingService {
         Log.i("Skating", ">>>>>> Connected inside BluetoothSkatingService");
         skateDataSocket = (BluetoothSocket) event.getData();
         inputStream = skateDataSocket.getInputStream();
+        outputStream = skateDataSocket.getOutputStream();
+        sendInitMessage(outputStream, "Hello Skateboard!");
         AsyncTask.execute(new SkateListeningThread(inputStream));
+    }
+
+    private void sendInitMessage(OutputStream outputStream, String message) throws IOException {
+        Log.i("Skating", ">>>>>> Sending message " + message);
+        outputStream.write(message.getBytes());
     }
 
     @Subscribe

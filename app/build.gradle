@@ -27,6 +27,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
 
+    compile 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:0.7.0'
+
     // events
     compile 'org.greenrobot:eventbus:3.0.0'
 

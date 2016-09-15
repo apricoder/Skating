@@ -2,11 +2,13 @@ package com.servocode.skating.core.bluetooth.threads;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.servocode.skating.core.bluetooth.BluetoothSkatingConstants;
 import com.servocode.skating.core.events.SkateDataReceivedEvent;
 import com.servocode.skating.core.events.SkateDeviceStopListeningEvent;
+import com.servocode.skating.core.model.SkatePosition;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -26,11 +28,16 @@ public class SkateListeningThread implements Runnable {
     @Override
     public void run() {
         Log.i("Skating", ">>>>>> Started reading data");
+        byte[] buffer = new byte[1024];
         while (!Thread.currentThread().isInterrupted() && !stopListening) {
             try {
+
+//                int bytes = inputStream.read(buffer);
+//                String data = new String(buffer, 0, bytes);
+//                Log.i("Skating", ">>>>>> Data received! " + data);
+
                 int bytesAvailable = inputStream.available();
-                Log.i("Skating", ">>>>>> Available bytes: " + bytesAvailable);
-                if (bytesAvailable > 0) {
+                if (bytesAvailable > 30) {
 
                     byte[] packetBytes = new byte[bytesAvailable];
                     byte[] readBuffer = new byte[1024];
@@ -39,16 +46,17 @@ public class SkateListeningThread implements Runnable {
                     inputStream.read(packetBytes);
                     for (int i = 0; i < bytesAvailable; i++) {
                         byte nextByte = packetBytes[i];
-                        if (notNewLineSymbol(nextByte)) readBuffer[readBufferPosition++] = nextByte;
+                        if (nextByte == '\n') continue;
+                        if (nextByte != '\r') readBuffer[readBufferPosition++] = nextByte;
                         else {
                             byte[] bytesRed = new byte[readBufferPosition];
                             System.arraycopy(readBuffer, 0, bytesRed, 0, bytesRed.length);
-                            Log.i("Skating", ">>>>>> BT is enabled");
-                            broadcastData(new String(bytesRed, "US-ASCII"));
+                            String data = new String(bytesRed, "US-ASCII");
+                            broadcastCompleteData(data);
                             readBufferPosition = 0;
                         }
                     }
-                }
+                } else SystemClock.sleep(200);
             } catch (IOException ex) {
                 stopListening = true;
                 Log.i("Skating", ">>>>>> Stopping worker");
@@ -57,17 +65,30 @@ public class SkateListeningThread implements Runnable {
     }
 
     private boolean notNewLineSymbol(byte nextByte) {
-        return nextByte != BluetoothSkatingConstants.NEW_LINE_CHAR;
+        return nextByte != BluetoothSkatingConstants.RETURN_CHAR;
     }
 
-    private void broadcastData(final String data) {
+    private void broadcastCompleteData(final String data) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             public void run() {
-                Log.i("Skating", ">>>>>> Received data");
-                Log.i("Skating", data);
-                EventBus.getDefault().post(new SkateDataReceivedEvent(data));
+                if (isComplete(data)) {
+                    //Log.i("Skating", ">>>>>> Got data " + data);
+                    SkatePosition position = getSkatePositionFrom(data);
+                    EventBus.getDefault().post(new SkateDataReceivedEvent(position));
+                }
             }
         });
+    }
+
+    private SkatePosition getSkatePositionFrom(String data) {
+        String[] dataComponents = data.split(";");
+        float frontBackAngle = Float.parseFloat(dataComponents[3]);
+        float leftRightAngle = Float.parseFloat(dataComponents[4]);
+        return new SkatePosition(frontBackAngle, leftRightAngle);
+    }
+
+    private boolean isComplete(String data) {
+        return data.matches("((-?[0-9]+\\.[0-9]+;){6})(\\-?[0-9]+\\.[0-9]+)");
     }
 
     @Subscribe

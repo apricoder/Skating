@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".presentation.activities.MainActivity">
 
@@ -139,19 +140,29 @@
 
         </RelativeLayout>
 
-        <!-- SPEED LABEL -->
-        <TextView
-            android:id="@+id/tilted_text"
-            android:text="Tilted to left, top"
-            android:textColor="#000"
-            android:textSize="22sp"
-            android:textAllCaps="true"
+        <!-- LEFT RIGHT BAR -->
+        <SeekBar
+
+            android:id="@+id/horizontal_seek_bar"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
+            android:progress="50"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="match_parent">
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                android:id="@+id/vertical_seek_bar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:progress="50"
+                android:splitTrack="false"
+                app:seekBarRotation="CW90" /> <!-- Rotation: CW90 or CW270 -->
+        </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 
     </RelativeLayout>
 
