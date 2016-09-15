@@ -24,6 +24,7 @@ import com.servocode.skating.core.events.SkateDeviceStopListeningEvent;
 import com.servocode.skating.core.model.SkatePosition;
 import com.servocode.skating.presentation.utils.animation.ActivityNavigator;
 import com.servocode.skating.presentation.utils.font.FontCollection;
+import com.servocode.skating.presentation.utils.seekbar.DummyOnTouchListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -48,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         registerOnEvents();
         findSeekBars();
         setSeekBarsTintColor();
+        setSeekBarsUntouchable();
+    }
+
+    private void setSeekBarsUntouchable() {
+        verticalSeekbar.setOnTouchListener(new DummyOnTouchListener());
+        horizontalSeekbar.setOnTouchListener(new DummyOnTouchListener());
     }
 
     private void findSeekBars() {

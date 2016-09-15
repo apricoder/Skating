@@ -142,7 +142,6 @@
 
         <!-- LEFT RIGHT BAR -->
         <SeekBar
-
             android:id="@+id/horizontal_seek_bar"
             android:layout_alignParentBottom="true"
             android:progress="50"
