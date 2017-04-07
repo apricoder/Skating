@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         SkatePosition skatePosition = event.getSkatePosition();
         float frontBackTint = skatePosition.getFrontBackTint();
         float leftRightTint = skatePosition.getLeftRightTint();
-        //Log.i("Skating", ">>>>>> front-back:" + frontBackTint + " left-right: " + leftRightTint);
+        Log.i("Skating", ">>>>>> front-back:" + frontBackTint + " left-right: " + leftRightTint);
         int adjustedFrontBackTint = 100 - Math.round((frontBackTint + 10) * 5);
         int adjustedLeftRightTint = Math.round((leftRightTint + 10) * 5);
         float magicValue = skatePosition.getMagicValue();
